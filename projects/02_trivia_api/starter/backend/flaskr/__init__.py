@@ -16,7 +16,20 @@ def create_app(test_config=None):
   '''
   @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
   '''
+  CORS(app)
+ 
+  
+  # CORS Headers
 
+  @app.after_request
+  def after_request(response):
+    response.headers.add(
+        "Access-Control-Allow-Headers", "Content-Type,Authorization,true"
+    )
+    response.headers.add(
+        "Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS"
+    )
+    return response
   '''
   @TODO: Use the after_request decorator to set Access-Control-Allow
   '''
@@ -26,14 +39,45 @@ def create_app(test_config=None):
   Create an endpoint to handle GET requests 
   for all available categories.
   '''
+  @app.route("/categories")
+    def retrieve_categories():
+        selection = Category.query.order_by(Category.type).all()
+       
+       
+        if len(selection) == 0:
+          abort(404)
 
+        return jsonify(
+            {
+                "success": True,
+                "category": selection
+            }
+        )
+    @app.route("/questions")
+        def retrieve_questions():
+            selection = Question.query.order_by(Question.question).all()
+            current_questions = paginate_questions(request, selection)
 
+            if len(current_questions) == 0:
+                abort(404)
+
+            return jsonify(
+                {
+                    "success": True,
+                    "question": selection.question,
+                    "total_questions": len(Question.query.all()),
+                    "category": Category.query.filter_by(id=selection.category).first()
+               # left off here
+                }
+        )
   '''
   @TODO: 
   Create an endpoint to handle GET requests for questions, 
   including pagination (every 10 questions). 
   This endpoint should return a list of questions, 
   number of total questions, current category, categories. 
+
+  
 
   TEST: At this point, when you start the application
   you should see questions and categories generated,

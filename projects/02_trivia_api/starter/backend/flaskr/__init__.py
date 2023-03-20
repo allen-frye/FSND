@@ -8,7 +8,7 @@ from models import setup_db, Question, Category
 
 QUESTIONS_PER_PAGE = 10
 
-def paginate_quetions(request, selection):
+def paginate_questions(request, selection):
     page = request.args.get("page", 1, type=int)
     start = (page - 1) * QUESTIONS_PER_PAGE
     end = start + QUESTIONS_PER_PAGE
@@ -16,7 +16,7 @@ def paginate_quetions(request, selection):
     questions = [question.format() for question in selection]
     current_questions = questions[start:end]
 
-    return current_books
+    return current_questions
 
 def create_app(test_config=None):
   # create and configure the app
@@ -57,29 +57,42 @@ def create_app(test_config=None):
     if len(selection) == 0:
       abort(404)
 
-      return jsonify(
-        {
-          "success": True,
-          "category": selection
-        }
+    return jsonify(
+      {
+        "success": True,
+        "category": selection
+      }
     )
   @app.route("/questions")
-  def retrieve_questions():
-    selection = Question.query.order_by(Question.question).all()
+  def getQuestions():
+    # questions_list = []
+    categories = []
+    categories_list = Category.query.all()
+    selection = Question.query.order_by(Question.id).all()
+    # questions_count = len(selection)
     current_questions = paginate_questions(request, selection)
+    # categories = Category.query.filter_by(id=current_questions.category).first()
+    
+    for item in categories_list:
+      categories.append({
+        "id": item.id,
+        "type": item.type
+        })
+
 
     if len(current_questions) == 0:
       abort(404)
 
-      return jsonify(
-        {
-          "success": True,
-          "question": selection.question,
-          "total_questions": len(Question.query.all()),
-          "category": Category.query.filter_by(id=selection.category).first()
-          "categories": Category.query.all()
-        }
-      )
+    return jsonify(
+      {
+        "success": True,
+        "questions": current_questions,
+        "total_questions": len(Question.query.all()),
+        "current_category": 'test',
+        # Category.query.filter_by(id=current_questions.category).first(),
+        "categories": categories
+      }
+    )
   '''
   @TODO: 
   Create an endpoint to handle GET requests for questions, 

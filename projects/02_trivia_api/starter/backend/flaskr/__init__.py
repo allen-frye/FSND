@@ -74,10 +74,7 @@ def create_app(test_config=None):
     # categories = Category.query.filter_by(id=current_questions.category).first()
     
     for item in categories_list:
-      categories.append({
-        "id": item.id,
-        "type": item.type
-        })
+      categories.append(item.type)
 
 
     if len(current_questions) == 0:

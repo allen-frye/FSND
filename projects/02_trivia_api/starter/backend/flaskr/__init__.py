@@ -66,15 +66,18 @@ def create_app(test_config=None):
   @app.route("/questions")
   def getQuestions():
     # questions_list = []
-    categories = []
-    categories_list = Category.query.all()
+    # categories = []
+    categories = Category.query.order_by(Category.type).all()
     selection = Question.query.order_by(Question.id).all()
     # questions_count = len(selection)
     current_questions = paginate_questions(request, selection)
     # categories = Category.query.filter_by(id=current_questions.category).first()
     
-    for item in categories_list:
-      categories.append(item.type)
+    # Rahul's solution
+    # https://knowledge.udacity.com/questions/224220
+    categories_formatted = {category.id: category.type for category in categories}
+    # for item in categories_list:
+    #   categories.append(item.type)
 
 
     if len(current_questions) == 0:
@@ -87,7 +90,7 @@ def create_app(test_config=None):
         "total_questions": len(Question.query.all()),
         "current_category": 'test',
         # Category.query.filter_by(id=current_questions.category).first(),
-        "categories": categories
+        "categories": categories_formatted
       }
     )
   '''

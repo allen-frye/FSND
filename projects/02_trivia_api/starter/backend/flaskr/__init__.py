@@ -51,16 +51,22 @@ def create_app(test_config=None):
   '''
   @app.route("/categories")
   def retrieve_categories():
-    selection = Category.query.order_by(Category.type).all()
+    
+    categories = Category.query.order_by(Category.type).all()
+    # Rahul's solution
+    # https://knowledge.udacity.com/questions/224220
+    categories_formatted = {category.id: category.type for category in categories}  
+    # selection = Category.query.order_by(Category.type).all()
        
        
-    if len(selection) == 0:
+    if len(categories_formatted) == 0:
       abort(404)
 
     return jsonify(
       {
         "success": True,
-        "category": selection
+        "categories": categories_formatted,
+
       }
     )
   @app.route("/questions")
@@ -88,36 +94,55 @@ def create_app(test_config=None):
         "success": True,
         "questions": current_questions,
         "total_questions": len(Question.query.all()),
-        "current_category": 'test',
+        "current_category": '',
         # Category.query.filter_by(id=current_questions.category).first(),
         "categories": categories_formatted
       }
     )
   '''
-  @TODO: 
+  @TODO: DONE
   Create an endpoint to handle GET requests for questions, 
   including pagination (every 10 questions). 
   This endpoint should return a list of questions, 
   number of total questions, current category, categories. 
 
-  
-
-  TEST: At this point, when you start the application
+  TEST: OK - At this point, when you start the application
   you should see questions and categories generated,
   ten questions per page and pagination at the bottom of the screen for three pages.
   Clicking on the page numbers should update the questions. 
   '''
 
   '''
-  @TODO: 
+  @TODO: DONE 
   Create an endpoint to DELETE question using a question ID. 
 
   TEST: When you click the trash icon next to a question, the question will be removed.
   This removal will persist in the database and when you refresh the page. 
   '''
+  @app.route("/questions/<int:question_id>", methods=["DELETE"])
+  def delete_question(question_id):
+    try:
+      question = Question.query.filter(Question.id == question_id).one_or_none()
+
+      if question is None:
+        abort(404)
+
+      question.delete()
+      return jsonify(
+        {
+        "success": True,
+        "deleted": question_id
+                    
+        }
+      )
+
+    except:
+      abort(422)
+
+
 
   '''
-  @TODO: 
+  @TODO: Done
   Create an endpoint to POST a new question, 
   which will require the question and answer text, 
   category, and difficulty score.
@@ -126,6 +151,32 @@ def create_app(test_config=None):
   the form will clear and the question will appear at the end of the last page
   of the questions list in the "List" tab.  
   '''
+  @app.route("/questions", methods=["POST"])
+  def create_question():
+    body = request.get_json()
+
+
+    new_question = body.get("question", None)
+    new_answer = body.get("answer", None)
+    new_difficulty = body.get("difficulty", None)
+    new_category = body.get("category", None)
+
+    try:
+      question = Question(question=new_question, answer=new_answer, difficulty=new_difficulty, category=new_category)
+      question.insert()
+
+        # selection = Book.query.order_by(Book.id).all()
+        # current_books = paginate_books(request, selection)
+
+      return jsonify(
+        {
+          "success": True,
+          "created": question.id
+          }
+      )
+
+    except:
+      abort(422)
 
   '''
   @TODO: 

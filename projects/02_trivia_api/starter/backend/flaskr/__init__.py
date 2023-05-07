@@ -179,7 +179,7 @@ def create_app(test_config=None):
       abort(422)
 
   '''
-  @TODO: 
+  @TODO: DONE
   Create a POST endpoint to get questions based on a search term. 
   It should return any questions for whom the search term 
   is a substring of the question. 
@@ -188,16 +188,55 @@ def create_app(test_config=None):
   only question that include that string within their question. 
   Try using the word "title" to start. 
   '''
+  @app.route("/questions/search", methods=["POST"])
+  def search_question():
+
+   # https://knowledge.udacity.com/questions/267545
+    body = request.get_json()
+    search_term = body.get('searchTerm', None)
+
+    look_for = '%{0}%'.format(search_term)
+    questions = Question.query.filter(Question.question.ilike(look_for)).all()
+
+    current_questions = paginate_questions(request, questions)
+    
+    result = {
+      "total_questions": len(questions),
+      # "questions": [],
+      "questions": current_questions,
+      "current_category": None      
+      }
+    
+
+    return result
 
   '''
   @TODO: 
   Create a GET endpoint to get questions based on category. 
 
-  TEST: In the "List" tab / main screen, clicking on one of the 
+  TEST: In the "List" tab / main screen, cliking on one of the 
   categories in the left column will cause only questions of that 
   category to be shown. 
   '''
+  @app.route("/categories/<int:id>/questions")
+  def get_category(id):
+    category = Category.query.get(id)
+    category_name = category.type
+    try:
+      questions = Question.query.filter(Question.category == category_name).one_or_none()
 
+      if questions is None:
+        abort(404)
+
+       
+      result = { 
+        "questions": questions,
+        "totalQuestions": len(questions),
+        "currentCategory": None
+        }
+
+    except:
+      abort(422)
 
   '''
   @TODO: 

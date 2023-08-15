@@ -201,6 +201,7 @@ def create_app(test_config=None):
     current_questions = paginate_questions(request, questions)
     
     result = {
+      "success": True,
       "total_questions": len(questions),
       # "questions": [],
       "questions": current_questions,

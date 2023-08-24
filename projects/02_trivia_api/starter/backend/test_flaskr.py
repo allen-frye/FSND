@@ -72,6 +72,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data["success"], True)
         self.assertTrue(data["created"])
  
+    # uncomment when go to production
     # def test_405_if_question_creation_not_allowed(self):
     #     res = self.client().post("/questions/45", json=self.new_question)
     #     data = json.loads(res.data)
@@ -118,6 +119,16 @@ class TriviaTestCase(unittest.TestCase):
 
     #get category questions
 
+    def test_get_questions_by_category(self):
+        res = self.client().get('/categories/5/questions')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['totalQuestions'])
+        self.assertEqual(len(data['questions']), 2)
+
+# test error getting sentfor category 3
     # post quizzes
 
 

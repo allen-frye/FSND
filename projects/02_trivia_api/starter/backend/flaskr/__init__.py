@@ -240,6 +240,7 @@ def create_app(test_config=None):
 
       current_questions = paginate_questions(request, questions) 
       result = { 
+        "success": True,
         "questions": current_questions,
         "totalQuestions": len(current_questions),
         "currentCategory": None

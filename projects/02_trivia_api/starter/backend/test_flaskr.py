@@ -75,27 +75,19 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data["success"], True)
         self.assertTrue(data["created"])
  
-    # uncomment when go to production
-    # def test_405_if_question_creation_not_allowed(self):
-    #     res = self.client().post("/questions/45", json=self.new_question)
-    #     data = json.loads(res.data)
-
-    #     self.assertEqual(res.status_code, 405)
-    #     self.assertEqual(data["success"], False)
-    #     self.assertEqual(data["message"], "method not allowed")
  
     #delete question - test fails if id does not exist. uncomment when going lie
-    # def test_delete_question(self):
-    #     res = self.client().delete("/questions/17")
-    #     # print(res.data)
-    #     data = json.loads(res.data)
+    def test_delete_question(self):
+        res = self.client().delete("/questions/103")
+        # print(res.data)
+        data = json.loads(res.data)
 
-    #     question = Question.query.filter(Question.id == 17).one_or_none()
+        question = Question.query.filter(Question.id == 103).one_or_none()
 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data["success"], True)
-    #     self.assertEqual(data["deleted"], 17)
-    #     self.assertEqual(question, None)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(data["deleted"], 103)
+        self.assertEqual(question, None)
    
     def test_422_if_question_does_not_exist(self):
         res = self.client().delete("/questions/1000")

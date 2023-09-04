@@ -24,7 +24,10 @@ class TriviaTestCase(unittest.TestCase):
             'category': '1',
             'difficulty': '3'
             }    
-
+        # self.quiz_category['id'] = "3"
+        # self.previous_questions = []
+        
+        
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
@@ -128,9 +131,29 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data['totalQuestions'])
         self.assertEqual(len(data['questions']), 2)
 
-# test error getting sentfor category 3
+    def test_category_does_not_exist(self):
+        res = self.client().get('/categories/10000/questions')
+        
+        self.assertEqual(res.status_code, 404)
+       
+
     # post quizzes
 
+    def test_creating_quizzes(self):
+        res = self.client().post("/quizzes", json={"previous_questions": [], "quiz_category": {"type": "History", "id": "4"}})
+       
+        data = json.loads(res.data)
+        print(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertTrue(data['question'])
+
+    def test_quiz_category_not_found(self):
+        res = self.client().post("/quizzes", json={"previous_questions": [], "quiz_category": {"type": "space", "id": "10000"}})
+       
+        # data = json.loads(res.data)
+        self.assertEqual(res.status_code, 400)
+        
 
 # Make the tests conveniently executable
 if __name__ == "__main__":

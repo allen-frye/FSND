@@ -98,6 +98,25 @@ GET '/api/v1.0/categories'
 '5' : "Entertainment",
 '6' : "Sports"}
 
+POST '/questions/<int:question_id>", methods=["DELETE"]'
+- Deletes a single question
+- Returns the deleted question
+
+POST @app.route("/questions", methods=["POST"])
+- Posts a new question to the database
+- Required fields are 'question,' 'answer,' 'difficulty,'  'category.'
+
+POST @app.route("/questions/search", methods=["POST"])
+-Takes a string input and returns all questions that contain the string
+
+GET  @app.route("/categories/<int:category_id>/questions", methods=["GET"])
+-Return a paginated list of questions by category. 
+
+POST  @app.route("/quizzes", methods=["POST"])
+-Loads all questions for a quiz (category or all) individualy (one by one) and displays correct/incorrect message when posted.
+
+
+
 ```
 
 

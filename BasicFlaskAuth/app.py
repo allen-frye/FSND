@@ -4,6 +4,10 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
+# SSL Error Workaround
+# https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
 
@@ -61,6 +65,7 @@ def verify_decode_jwt(token):
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
         }, 401)
+
 
     for key in jwks['keys']:
         if key['kid'] == unverified_header['kid']:
@@ -123,12 +128,15 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            try:
-                payload = verify_decode_jwt(token)
-            except:
-                print (token)
-                abort(401)
-            
+            payload = verify_decode_jwt(token)
+
+
+            # try:
+            #     payload = verify_decode_jwt(token)
+            # except:
+            #     print('hello')
+            #     abort(401)
+                
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 

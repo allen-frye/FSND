@@ -17,7 +17,13 @@ CORS(app)
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this function will add one
 '''
-# db_drop_and_create_all()
+db_drop_and_create_all()
+
+@app.route('/')
+def handler():
+    return jsonify({
+        "success": True
+    })
 
 # ROUTES
 '''
@@ -28,7 +34,21 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
+@app.route('/drinks', methods=['GET'])
+def get_drinks():
+    # getting all the drinks from the database
+    drinks = Drink.query.all()
+    short_drinks = []
 
+    # getting the short representation for each drink and adding it to a list of short_drinks
+    for drink in drinks:
+        short_drinks.append(drink.short())
+
+    # return the json object
+    return jsonify({
+        'success': True,
+        'drinks': short_drinks
+    }), 200
 
 '''
 @TODO implement endpoint
@@ -38,6 +58,11 @@ CORS(app)
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
+@app.route('/drinks-detail', methods=[GET])
+@requires_auth('get:drinks-detail')
+def get_drinks_detail(token):
+#here havet o implement auth header
+
 
 
 '''

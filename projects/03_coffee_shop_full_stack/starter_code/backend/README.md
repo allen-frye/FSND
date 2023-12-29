@@ -47,7 +47,7 @@ flask run --reload
 ```
 
 The `--reload` flag will detect file changes and restart the server automatically.
-
+#here - had to add sqlAlchemy==1.4 to requirements.txt
 ## Tasks
 
 ### Setup Auth0
@@ -70,6 +70,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
      - can `get:drinks-detail`
    - Manager
      - can perform all actions
+     Here
 7. Test your endpoints with [Postman](https://getpostman.com).
    - Register 2 users - assign the Barista role to one and Manager role to the other.
    - Sign into each account and make note of the JWT.

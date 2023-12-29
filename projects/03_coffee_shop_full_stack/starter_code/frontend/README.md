@@ -39,6 +39,8 @@ Ionic ships with a useful development server which detects changes and transpile
 ```bash
 ionic serve
 ```
+#NOTE: Finally got application to compile by following instructions from this post: https://#knowledge.udacity.com/questions/741138
+Had to go back to the repo and recopy package and package-lock.json. Also left out 12. ionic repair command.
 
 > _tip_: Do not use **ionic serve** in production. Instead, build Ionic into a build artifact for your desired platforms.
 > [Checkout the Ionic docs to learn more](https://ionicframework.com/docs/cli/commands/build)

@@ -17,7 +17,7 @@ CORS(app)
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this function will add one
 '''
-db_drop_and_create_all()
+# db_drop_and_create_all()
 
 @app.route('/')
 def handler():
@@ -34,6 +34,7 @@ def handler():
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
+#source: https://github.com/erinlouise11/Coffee-Shop/blob/master/backend/src/api.py#L21
 @app.route('/drinks', methods=['GET'])
 def get_drinks():
     # getting all the drinks from the database
@@ -45,6 +46,9 @@ def get_drinks():
         short_drinks.append(drink.short())
 
     # return the json object
+    if len(short_drinks) == 0:
+        abort(404)
+
     return jsonify({
         'success': True,
         'drinks': short_drinks
@@ -58,10 +62,23 @@ def get_drinks():
     returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
         or appropriate status code indicating reason for failure
 '''
-@app.route('/drinks-detail', methods=[GET])
-@requires_auth('get:drinks-detail')
-def get_drinks_detail(token):
-#here havet o implement auth header
+@app.route('/drinks-detail', methods=['GET'])
+# @requires_auth('get:drinks-detail')
+# def get_drinks_detail(token):
+def get_drinks_detail():
+    drinks = Drink.query.all()
+    long_drinks = []
+    for drink in drinks:
+        long_drinks.append(drink.long())
+        
+    if len(long_drinks) == 0:
+        abort(404)
+
+    return jsonify({
+        'success': True,
+        'drinks': long_drinks
+    }), 200
+
 
 
 

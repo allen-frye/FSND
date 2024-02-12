@@ -21,7 +21,7 @@ class AuthError(Exception):
 
 
 ## Auth Header
-
+# Done - not tested
 '''
 @TODO implement get_token_auth_header() method
     it should attempt to get the header from the request
@@ -31,7 +31,37 @@ class AuthError(Exception):
     return the token part of the header
 '''
 def get_token_auth_header():
-   raise Exception('Not Implemented')
+   # raise Exception('Not Implemented')
+   # if "Authorization" not in request.headers:
+    # abort(401)
+
+    # auth_header = request.headers['Authorization']
+    
+
+    auth_header = request.headers.get('Authorization', None)
+    if not auth_header:
+        raise AuthError({
+            'code': 'no_auth_header',
+            'description': 'Expected Auth Header'
+            }, 401)
+    
+
+    header_parts = auth_header.split(' ')
+    
+    if len(header_parts) != 2:
+        raise AuthError({
+            'code': 'malformed_header',
+            'description': 'No token'
+            }, abort(401))
+    
+    elif header_parts[0].lower() != 'Bearer':
+        raise AuthError({
+            'code': 'malformed_header',
+            'description': 'No bearer'
+            }, abort(401))
+
+    return header_parts[1]
+
 
 '''
 @TODO implement check_permissions(permission, payload) method
@@ -45,7 +75,20 @@ def get_token_auth_header():
     return true otherwise
 '''
 def check_permissions(permission, payload):
-    raise Exception('Not Implemented')
+    if 'permissions' not in payload:
+        raise AuthError({
+            'code': 'invalid_claims',
+            'description': 'Permissions not included in JWT.'
+            }, 400)
+
+    if permission not in payload['permissions']:
+        raise AuthError({
+            'code': 'unauthorized',
+            'description': 'Permission not found.'
+        }, 401)
+    return True
+
+    # raise Exception('Not Implemented')
 
 '''
 @TODO implement verify_decode_jwt(token) method
@@ -61,7 +104,53 @@ def check_permissions(permission, payload):
     !!NOTE urlopen has a common certificate error described here: https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
 '''
 def verify_decode_jwt(token):
-    raise Exception('Not Implemented')
+    # raise Exception('Not Implemented')
+    def requires_auth(f):
+    # """Determines if the Access Token is valid"""
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            token = get_token_auth_header()
+            jsonurl = urlopen("https://"+AUTH0_DOMAIN+"/.well-known/jwks.json")
+            jwks = json.loads(jsonurl.read())
+            unverified_header = jwt.get_unverified_header(token)
+            rsa_key = {}
+            for key in jwks["keys"]:
+                if key["kid"] == unverified_header["kid"]:
+                    rsa_key = {
+                        "kty": key["kty"],
+                        "kid": key["kid"],
+                        "use": key["use"],
+                        "n": key["n"],
+                        "e": key["e"]
+                    }
+            if rsa_key:
+                try:
+                    payload = jwt.decode(
+                        token,
+                        rsa_key,
+                        algorithms=ALGORITHMS,
+                        audience=API_AUDIENCE,
+                        issuer="https://"+AUTH0_DOMAIN+"/"
+                    )
+                except jwt.ExpiredSignatureError:
+                    raise AuthError({"code": "token_expired",
+                                "description": "token is expired"}, 401)
+                except jwt.JWTClaimsError:
+                    raise AuthError({"code": "invalid_claims",
+                                "description":
+                                    "incorrect claims,"
+                                    "please check the audience and issuer"}, 401)
+                except Exception:
+                    raise AuthError({"code": "invalid_header",
+                                "description":
+                                    "Unable to parse authentication"
+                                    " token."}, 401)
+
+                _request_ctx_stack.top.current_user = payload
+                return f(*args, **kwargs)
+            raise AuthError({"code": "invalid_header",
+                        "description": "Unable to find appropriate key"}, 401)
+        return decorated
 
 '''
 @TODO implement @requires_auth(permission) decorator method

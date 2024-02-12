@@ -63,9 +63,9 @@ def get_drinks():
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks-detail', methods=['GET'])
-# @requires_auth('get:drinks-detail')
-# def get_drinks_detail(token):
-def get_drinks_detail():
+@requires_auth('get:drinks-detail')
+def get_drinks_detail(token):
+# def get_drinks_detail():
     drinks = Drink.query.all()
     long_drinks = []
     # print(drinks)

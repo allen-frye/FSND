@@ -95,9 +95,9 @@ def get_drinks_detail(token):
 '''
 
 @app.route('/drinks', methods=['POST'])
-# @requires_auth('post:drinks')
-# def post_drinks(token):
-def post_drinks():
+@requires_auth('post:drinks')
+def post_drinks(token):
+# def post_drinks():
     body = request.get_json()
 
     # if not ('title' in body and 'recipe' in body):
@@ -134,7 +134,7 @@ def post_drinks():
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
-# add auth
+@requires_auth('patch:drinks')
 def update_drink(drink_id):
     body = request.get_json()
     drink = Drink.query.filter_by(id=drink_id).one_or_none()
@@ -179,6 +179,7 @@ def update_drink(drink_id):
 
 
 @app.route('/drinks/<int:drink_id>', methods=['DELETE'])
+@requires_auth('delete:drinks')
 def delete_drink(drink_id):
     drink_test = Drink.query.all()
     print(drink_test)

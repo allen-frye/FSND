@@ -52,13 +52,13 @@ def get_token_auth_header():
         raise AuthError({
             'code': 'malformed_header',
             'description': 'No token'
-            }, abort(401))
+            }, 401)
     
     elif header_parts[0].lower() != 'Bearer':
         raise AuthError({
             'code': 'malformed_header',
             'description': 'No bearer'
-            }, abort(401))
+            }, 401)
 
     return header_parts[1]
 

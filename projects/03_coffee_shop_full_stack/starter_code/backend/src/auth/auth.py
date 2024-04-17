@@ -48,19 +48,31 @@ def get_token_auth_header():
 
     header_parts = auth_header.split(' ')
     
-    if len(header_parts) != 2:
-        raise AuthError({
-            'code': 'malformed_header',
-            'description': 'No token'
-            }, 401)
+    # if len(header_parts) != 2:
+    #     raise AuthError({
+    #         'code': 'malformed_header',
+    #         'description': 'No token'
+    #         }, 401)
     
-    elif header_parts[0].lower() != 'Bearer':
+    if header_parts[0].lower() != 'bearer':
+        
         raise AuthError({
-            'code': 'malformed_header',
+            'code': 'invalid header',
             'description': 'No bearer'
             }, 401)
+    elif len(header_parts)==1:
+        raise AuthError({
+            'code': 'invalid header',
+            'description': 'Token not found'
+            }, 401)
+    elif len(header_parts) > 2:
+        raise AuthError({
+            'code': 'invalid_header',
+            'description': 'header must be bearer token'
+            }, 401) 
 
-    return header_parts[1]
+    token = header_parts[1]
+    return token
 
 
 '''
@@ -103,6 +115,8 @@ def check_permissions(permission, payload):
 
     !!NOTE urlopen has a common certificate error described here: https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
 '''
+# Validation code from Auth0
+# https://auth0.com/docs/quickstart/backend/python/01-authorization
 def verify_decode_jwt(token):
     # raise Exception('Not Implemented')
     def requires_auth(f):

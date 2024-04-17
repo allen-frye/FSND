@@ -17,7 +17,7 @@ CORS(app)
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this function will add one
 '''
-db_drop_and_create_all()
+# db_drop_and_create_all()
 
 @app.route('/')
 def handler():
@@ -71,8 +71,8 @@ def get_drinks_detail(token):
     # print(drinks)
     for drink in drinks:
         long_drinks.append(drink.long())
-    print("Get:")
-    print(long_drinks)    
+    # print("Get:")
+    # print(long_drinks)    
     if len(long_drinks) == 0:
         abort(404)
 

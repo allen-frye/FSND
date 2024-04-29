@@ -98,6 +98,7 @@ def get_drinks_detail(token):
 @requires_auth('post:drinks')
 def post_drinks(token):
 # def post_drinks():
+    
     body = request.get_json()
 
     # if not ('title' in body and 'recipe' in body):
@@ -106,7 +107,7 @@ def post_drinks(token):
     new_title = body["title"]
     # new_recipe = body.get("recipe", None)
     new_recipe = json.dumps(body["recipe"])
-    # print(new_recipe + new_title)
+    print(new_recipe + new_title)
     try:
       drink = Drink(title=new_title, recipe=new_recipe)
       drink.insert()

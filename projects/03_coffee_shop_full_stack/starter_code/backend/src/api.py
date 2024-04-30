@@ -17,7 +17,7 @@ CORS(app)
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 !! Running this function will add one
 '''
-# db_drop_and_create_all()
+#db_drop_and_create_all()
 
 @app.route('/')
 def handler():
@@ -123,6 +123,7 @@ def post_drinks(token):
     except:
         abort(422)
 
+
 '''
 @TODO implement endpoint
     PATCH /drinks/<id>
@@ -136,7 +137,7 @@ def post_drinks(token):
 '''
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
 @requires_auth('patch:drinks')
-def update_drink(drink_id):
+def update_drink(payload, drink_id):
     body = request.get_json()
     drink = Drink.query.filter_by(id=drink_id).one_or_none()
 
@@ -166,7 +167,6 @@ def update_drink(drink_id):
         })
 
 
-
 '''
 @TODO implement endpoint
     DELETE /drinks/<id>
@@ -181,7 +181,7 @@ def update_drink(drink_id):
 
 @app.route('/drinks/<int:drink_id>', methods=['DELETE'])
 @requires_auth('delete:drinks')
-def delete_drink(drink_id):
+def delete_drink(payload, drink_id):
     drink_test = Drink.query.all()
     print(drink_test)
     drink = Drink.query.filter_by(id = drink_id).one_or_none()
@@ -200,7 +200,8 @@ def delete_drink(drink_id):
         }
     )
 
-
+#endpoints work
+# test barista errors attempting to post/patch/delete
 
 
 # Error Handling

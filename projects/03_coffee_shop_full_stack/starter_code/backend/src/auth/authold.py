@@ -220,3 +220,5 @@ def requires_auth(permission=''):
 
         return wrapper
     return requires_auth_decorator
+
+    # Had issues with permissions not being iterable. switched to code from https://github.com/kalsmic/Coffee_Shop_Full_Stack/blob/master/backend/src/auth/auth.py

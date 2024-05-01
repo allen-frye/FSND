@@ -70,7 +70,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
      - can `get:drinks-detail`
    - Manager
      - can perform all actions
-     Here
+   
 7. Test your endpoints with [Postman](https://getpostman.com).
 use front end to register users.
    - Register 2 users - assign the Barista role to one and Manager role to the other.
@@ -78,6 +78,7 @@ use front end to register users.
    - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
    - Run the collection and correct any errors.
+# Here have to export collection with JWT's that won't expire.
    - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
 
 ### Implement The Server

@@ -5,7 +5,7 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
-# Fix SSL Issue before going to production
+# Remove before going to production
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -19,6 +19,7 @@ AuthError Exception
 A standardized way to communicate auth failure modes
 '''
 
+# My original attempts at this are in authold.py. I had an error I couldn't resolve so I relied heavily on code from here to complete this: https://github.com/kalsmic/Coffee_Shop_Full_Stack/blob/master/backend/src/auth/auth.py
 
 class AuthError(Exception):
     def __init__(self, error, status_code):

@@ -282,5 +282,6 @@ def auth_error(error):
     }), error.status_code
 
 if __name__ == "__main__":
+    # Remove Before Production
     app.debug = True
     app.run()

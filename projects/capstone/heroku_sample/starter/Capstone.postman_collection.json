@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "d8e0d126-ec27-406b-83a0-eb3c0f8eafb7",
+		"name": "Capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29522349"
+	},
+	"item": [
+		{
+			"name": "Casting Agent",
+			"item": [
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// pm.test(\"value contains drinks array\", function () {",
+									"//     var jsonData = pm.response.json();",
+									"//     pm.expect(jsonData.drinks).to.be.an('array')",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// pm.test(\"value contains drinks array\", function () {",
+									"//     var jsonData = pm.response.json();",
+									"//     pm.expect(jsonData.drinks).to.be.an('array')",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpWbFMyc1FwMUloYmFXVFRoUGp2ZCJ9.eyJpc3MiOiJodHRwczovL2Rldi15czJnam12OHQyaDdoMTZ0LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NjRjZTFlZjJmODJlMzhmNmQ4YzQ4NDkiLCJhdWQiOiJodHRwczovL2FsbGVuLWZyeWUtY2Fwc3RvbmUtYXBwLWViMTViYjEzNDQ3Mi5oZXJva3VhcHAuY29tLyIsImlhdCI6MTcxNjQ5ODk1NiwiZXhwIjoxNzE2NTg1MzU2LCJzY29wZSI6IiIsImF6cCI6IjU5SGFGbFpESG82VUdFdVdyVjhLekhLVHd6cFI2UkU2IiwicGVybWlzc2lvbnMiOlsidmlldzphY3RvcnMiLCJ2aWV3Om1vdmllcyJdfQ.phXfqUdc7k66DIAv-jITOyT3F1jdj4_FOAmd21ilK4qC--a8qH-LdgbudGTjG296uEuBuOT3Dev-e3-IqUYxW6hAP8NKNcIW7Z_Zuvb4k_H3hamfexjebMbLdG1zN7Hq5u4cecgjxL6mLDyRGT1kipRBS5XTL6pZXyq37L94YvUYrgmW_lsRl4FAocD620ppEUvQ8ePzD9Cp5NY00-mfs6PCbq9zcbAj9u-pzRyesimQ-djaYrFm1Ya_n6FEvm-tRNdbrVOmfwznyRIurolTsxthnwkN6l9bCSDv0wfNTk1UZOlYjCVLt0YdHthSZcBHoCXckpPARuJKlLRRRlChWQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Casting Director",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// pm.test(\"value contains drinks array\", function () {",
+									"//     var jsonData = pm.response.json();",
+									"//     pm.expect(jsonData.drinks).to.be.an('array')",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// pm.test(\"value contains drinks array\", function () {",
+									"//     var jsonData = pm.response.json();",
+									"//     pm.expect(jsonData.drinks).to.be.an('array')",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 401 since no credentials are present\", function () {",
+									"//     pm.response.to.have.status(401);",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Allen mytest\",\n    \"age\": 44,\n    \"catchphrase\": \"Love it here.\",\n    \"gender\": \"mytest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 since credentials are valid, but permission is not present\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Allen Fryse\", \n    \"age\": 39, \n    \"catchphrase\": \"Love it over there.\", \n    \"gender\": \"Male\",\n    \"movies\": \"when harry met sally\",\n    \"release_date\": \"02/01/2003\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 since credentials are valid, but permission is not present\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"new special mymovie\", \n    \"release_date\": \"01/15/2012\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpWbFMyc1FwMUloYmFXVFRoUGp2ZCJ9.eyJpc3MiOiJodHRwczovL2Rldi15czJnam12OHQyaDdoMTZ0LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NjRjZTFhZDRlNGNiNTg1OWZmYTZjZWIiLCJhdWQiOiJodHRwczovL2FsbGVuLWZyeWUtY2Fwc3RvbmUtYXBwLWViMTViYjEzNDQ3Mi5oZXJva3VhcHAuY29tLyIsImlhdCI6MTcxNjQ5OTEwNiwiZXhwIjoxNzE2NTg1NTA2LCJzY29wZSI6IiIsImF6cCI6IjU5SGFGbFpESG82VUdFdVdyVjhLekhLVHd6cFI2UkU2IiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOmFjdG9ycyIsImRlbGV0ZTphY3RvcnMiLCJ1cGRhdGU6YWN0b3JzIiwidXBkYXRlOm1vdmllcyIsInZpZXc6YWN0b3JzIiwidmlldzptb3ZpZXMiXX0.0bBQg7OeNMWV9EaAeoJcMzAgRtkpn63DWK9ZAoY9YR2sz4G6geYJs7NhbI0V9mo_ZxgZLAMsCcuNC_eypuamyVF1rxWzoOlVNkvAWXkrHZ3V-lJpdRmVELgW-zCzxm6_sC_LKIbrDjfF5sTST0mQKLY-gqgqto8M4Ep80JQwvzcBhgyRN4wUhPXVrYr2AQKEoTcZ5RvygRZBEcF_aRC0NeOZYehi6ZH3eHZXz_qjBzZpZvtPCbmLdJCtSX1qs-BawbHXRY2zuFEd6THL9sYtsbkZy6BEqq3FOOL9jQ1toU9Yv97N3uUAQ6rvwBED3nDpTJ_NwdES8Ctt3gjmJKCeWg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Executive Producer",
+			"item": [
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 401 since no credentials are present\", function () {",
+									"//     pm.response.to.have.status(401);",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"title\": \"new mymovie\",\n   \"release_date\": \"01/01/2011\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// pm.test(\"Status code is 401 since no credentials are present\", function () {",
+									"//     pm.response.to.have.status(401);",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Allen mytest\",\n    \"age\": 44,\n    \"catchphrase\": \"Love it here.\",\n    \"gender\": \"mytest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 since credentials are valid, but permission is not present\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"new special mymovie\", \n    \"release_date\": \"01/15/2012\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403 since credentials are valid, but permission is not present\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Allen Fryse\", \n    \"age\": 39, \n    \"catchphrase\": \"Love it over there.\", \n    \"gender\": \"Male\",\n    \"movies\": \"when harry met sally\",\n    \"release_date\": \"02/01/2003\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401 since no credentials are present\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401 since no credentials are present\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkpWbFMyc1FwMUloYmFXVFRoUGp2ZCJ9.eyJpc3MiOiJodHRwczovL2Rldi15czJnam12OHQyaDdoMTZ0LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NjRjZTIzNzRkMWMzNTcyMDZkZTc2ZTciLCJhdWQiOiJodHRwczovL2FsbGVuLWZyeWUtY2Fwc3RvbmUtYXBwLWViMTViYjEzNDQ3Mi5oZXJva3VhcHAuY29tLyIsImlhdCI6MTcxNjQ5OTM2NSwiZXhwIjoxNzE2NTg1NzY1LCJzY29wZSI6IiIsImF6cCI6IjU5SGFGbFpESG82VUdFdVdyVjhLekhLVHd6cFI2UkU2IiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOmFjdG9ycyIsImNyZWF0ZTptb3ZpZXMiLCJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsInVwZGF0ZTphY3RvcnMiLCJ1cGRhdGU6bW92aWVzIiwidmlldzphY3RvcnMiLCJ2aWV3Om1vdmllcyJdfQ.tQf6La_VgZOg6h6oRKUYQ-QjlGRpaZreoR_ZpBMzpnTePYJk6Q7nrGMzkrTqrDMRA-flIjlxh0P9A7utoSX3iOWEJKabOb_3CALIJ1Et986L4-QgnIIBsHEsSgBI0dqPAoEvclWt8rMVlZBcJEDLppVr-RmX4CujOctizM1Ii8YVDWewXdIkpfi_1H7zwB7aw3WO1HTIkUVMw4gT7sFNrGZ6Zi-xfx1D0IeiYCcb2_knDnJ7VSl2DKNVKibPiGS15okKrCXjFmcax-Q4oJ2uRQqS2feuwxfixepZEw_0CNzUlX7lEvy4HsopuhcfIJaTdI3YSllBTx4nFb9A92v8Ng",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "https://allen-frye-capstone-app-eb15bb134472.herokuapp.com",
+			"type": "string"
+		}
+	]
+}
